@@ -5,15 +5,15 @@ import math
 p = 250
 
 def linear(x):
-    y = 1 - (x / np.pi)
+    y = np.pi - x
     return y
 
 def Diff_func(x):
-    y = (np.cos(2*x) - 1) / np.pi
+    y = np.cos(2*x) - 1
     return y
 
 def SCR_function(x, a):
-    y = 1 + np.sin(2*x)/(2*np.pi) - x/np.pi
+    y = np.pi + np.sin(2*x)/2 - x
     y = y-a
     return y
 
@@ -28,15 +28,17 @@ x = np.linspace(0, np.pi, 100)
 x = x[1:-1]
 y_target = SCR_function(x, 0)
 
+plt.plot(x, y_target)
+plt.show()
+
 x_guess = linear(x)
 x_ans = Netwon(x_guess, y_target)
 y_ans = SCR_function(x_ans, 0)
 
-'''
 plt.plot(x_ans, y_ans)
 plt.plot(x, y_target)
-'''
+plt.show()
+
 y_diff = y_ans - y_target
-y_diff = 250*y_diff
-plt.plot(x, y_diff)
+plt.plot(250*y_target, 250*y_diff)
 plt.show()
